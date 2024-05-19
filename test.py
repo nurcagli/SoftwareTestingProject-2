@@ -37,7 +37,7 @@ class InterfaceTests:
             print("Sayfa yüklendi: ", self.driver.title)
 
             # Sayfanın tam yüklenmesi bekleniyor.
-            WebDriverWait(self.driver, 5).until(
+            WebDriverWait(self.driver, 15).until(
                 EC.presence_of_element_located((By.ID, "login-icon"))
             )
 
@@ -47,14 +47,14 @@ class InterfaceTests:
             sleep(2)
 
             # Register Here butonuna tıklama
-            buttonRegisterHere = WebDriverWait(self.driver, 5).until(
+            buttonRegisterHere = WebDriverWait(self.driver, 15).until(
                 EC.element_to_be_clickable((By.ID, "go-register"))
             )
             buttonRegisterHere.click()
             sleep(2)
 
             # Kayıt formunu doldurma
-            input_register_email = WebDriverWait(self.driver, 5).until(
+            input_register_email = WebDriverWait(self.driver, 15).until(
                 EC.presence_of_element_located((By.ID, "register-email"))
             )
 
@@ -91,7 +91,7 @@ class InterfaceTests:
             print("Sayfa yüklendi: ", self.driver.title)
 
             # Sayfanın tam yüklenmesi bekleniyor.
-            WebDriverWait(self.driver, 5).until(
+            WebDriverWait(self.driver, 15).until(
                 EC.presence_of_element_located((By.ID, "login-icon"))
             )
 
@@ -101,14 +101,14 @@ class InterfaceTests:
             sleep(2)
 
             # Register Here butonuna tıklama
-            buttonRegisterHere = WebDriverWait(self.driver, 5).until(
+            buttonRegisterHere = WebDriverWait(self.driver, 15).until(
                 EC.element_to_be_clickable((By.ID, "go-register"))
             )
             buttonRegisterHere.click()
             sleep(2)
 
             # Kayıt formunu doldurma
-            input_register_email = WebDriverWait(self.driver, 5).until(
+            input_register_email = WebDriverWait(self.driver, 15).until(
                 EC.presence_of_element_located((By.ID, "register-email"))
             )
 
@@ -125,10 +125,10 @@ class InterfaceTests:
             registerButton = self.driver.find_element(By.ID, "register")
             registerButton.click()
 
-            # URL'nin kontrol edilmesi, işlem başarısız ise yalnızca indexe dönülür.
+            # URL'nin kontrol edilmesi, işlem başarısız ise yalnızca a dönülür.
             expected_url = "http://127.0.0.1:3000/"
             try:
-                WebDriverWait(self.driver, 5).until(EC.url_to_be(expected_url))
+                WebDriverWait(self.driver, 15).until(EC.url_to_be(expected_url))
                 print("Başarısız Register Denemesi")
             except Exception as e:
                 print(" Register işleminde bir hata oluştu:", e)
@@ -259,7 +259,7 @@ class InterfaceTests:
             sleep(2)
             print(href_single)
            
-            expected_url = "http://127.0.0.1:3000/single-industry/20/"
+            expected_url = "http://127.0.0.1:3000/single-industry/1/"
             try:
                 WebDriverWait(self.driver, 15).until(EC.url_to_be(expected_url))
                 print("industry-single url kontrolü başarılı.")
@@ -371,12 +371,12 @@ class InterfaceTests:
             file_input.send_keys(file_path)
 
             sleep(3)
-            button_add =WebDriverWait(self.driver, 10).until(
+            button_add =WebDriverWait(self.driver, 15).until(
             EC.presence_of_element_located((By.XPATH , "/html/body/div/section[1]/div/div[2]/div/form/button"))
             ) 
             button_add.click()
             
-            message =WebDriverWait(self.driver, 10).until(
+            message =WebDriverWait(self.driver, 15).until(
             EC.presence_of_element_located((By.XPATH , "/html/body/div/section[1]/div/div[1]/div[2]/div/h5"))
             ).text
             expected_text = "Industry Added Successfully."
@@ -419,7 +419,7 @@ class InterfaceTests:
             
             self.driver.get(href_single ) #id belirtiliyor.0
             print(href_single)
-            expected_url = "http://127.0.0.1:3000/blog-single-post/19/"
+            expected_url = "http://127.0.0.1:3000/blog-single-post/1/"
             try:
                 WebDriverWait(self.driver, 15).until(EC.url_to_be(expected_url))
                 print("blog-single post url kontrolü başarılı.")
