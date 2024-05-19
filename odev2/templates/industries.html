@@ -1,0 +1,335 @@
+{% load static %}
+
+<!-- templates/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta name="description" content="DataSoft IT Solutions & Services Template">
+  <link href="{% static 'assets/images/favicon/favicon.png' %}" rel="icon">
+  <title>DataSoft IT Solutions & Services Template</title>
+
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Roboto:wght@400;700&display=swap">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css">
+  <link rel="stylesheet" href="{% static 'assets/css/libraries.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="preloader">
+      <div class="loading"><span></span><span></span><span></span><span></span></div>
+    </div><!-- /.preloader -->
+
+   
+    <!-- =========================
+        Header
+    =========================== -->
+    <header class="header header-transparent header-full">
+      <nav class="navbar navbar-expand-lg sticky-navbar">
+        <div class="container">
+          <a class="navbar-brand" href="#">
+            <img src="{% static 'assets/images/logo/logo-light.png' %}" class="logo-light" alt="logo">
+            <img src="{% static 'assets/images/logo/logo-dark.png' %}" class="logo-dark" alt="logo">
+          </a>
+          <button class="navbar-toggler" type="button">
+            <span class="menu-lines"><span></span></span>
+          </button>
+          <div class="header__top-right">
+            <ul class="list-unstyled d-flex justify-content-end align-items-center mb-0">
+             
+              <li>
+                <ul class="navbar-actions list-unstyled mb-0 d-flex align-items-center">
+               
+                  <li>
+                    <form method="post" action="{% url 'logout' %}">
+                      {% csrf_token %}
+                      <button type="submit" class="action__btn action__btn-login ">
+                          <i class="fas fa-sign-out-alt"></i><span>Logout</span>
+                      </button>
+                  </form>
+                  </li>
+                </ul><!-- /.navbar-actions -->
+              </li>
+            </ul>
+          </div><!-- /.header-top-right -->
+          <div class="collapse navbar-collapse" id="mainNavigation">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav__item ">
+                <a href="{% url 'indexUser' %}" id="home" class="nav__item-link">Home</a>
+              </li><!-- /.nav-item -->
+              
+              <li class="nav__item " > 
+                <a href="{% url 'industries' %}"  id="industries" class="nav__item-link">Industries</a>
+              </li><!-- /.nav-item -->
+              
+              <li class="nav__item ">
+                <a href="{% url 'blog' %}" id="blog" class="nav__item-link ">Our Blog</a>
+              </li><!-- /.nav-item -->
+             
+            </ul><!-- /.navbar-nav -->
+            <button class="close-mobile-menu d-block d-lg-none"><i class="fas fa-times"></i></button>
+          </div><!-- /.navbar-collapse -->
+          <div class="d-flex align-items-center">
+            <a href="#" class="action__btn action__btn-search ml-30"><i class="icon-search"></i></a>
+          </div>
+        </div><!-- /.container -->
+      </nav><!-- /.navabr -->
+    </header><!-- /.Header -->
+
+<!-- ========================
+       page title 
+    =========================== -->
+    <section class="page-title page-title-layout7 bg-overlay bg-overlay-gradient bg-parallax ">
+      <div class="bg-img"><img src="{% static 'assets/images/page-titles/10.jpg' %}" alt="background"></div>
+      <div class="container">
+            <!-- Add Industry Button -->
+            {% comment %} <button id="openIndustryForm">Add Industry</button> {% endcomment %}
+            <div class="row">
+              <div class="col-12 text-center"> <!-- text-center sınıfını ekledik -->
+                <h5 class="pagetitle__heading">Industries</h5>
+              </div><!-- /.col-lg-12 -->
+
+              <div class="col-12 text-center">
+                <div id ="message" style="display: {% if message %} block {% else %} none {% endif %};">
+                  {% if message %}
+                   <h5 style="color: white; ">{{message}}</h5>
+                  {% endif %}
+                </div>
+
+              </div>  
+    
+              <div class="col-12 text-center">
+                <button id="openIndustryForm" class="btn btn-primary">Add Industry</button>
+              </div>
+            
+            </div>   
+                         
+          <div class="industry-popup" id="industry-popup" style="display: none;">
+            <div class="industry-popup-wrapper">
+              <form class="industry-popup__form" method="post" action="{% url 'add_industry' %}">
+                {% csrf_token %}
+                <div class="form-group mb-20">
+                  <label for="industry_title">Industry Title:</label>
+                  <input type="text" name="title" class="form-control" id="industry_title" placeholder="Enter industry title">
+                </div>
+                <div class="form-group mb-20">
+                  <label for="industry_desc">Industry Description:</label>
+                  <textarea name="desc" class="form-control" id="industry_desc" placeholder="Enter industry description"></textarea>
+                </div>
+                <div class="form-group mb-20">
+                  <label for="industry_content">Industry Content:</label>
+                  <textarea name="content" class="form-control" id="industry_content" placeholder="Enter industry content"></textarea>
+                </div>
+                <div class="form-group mb-20">
+                  <label for="industry_image">Industry Image:</label>
+                  <input type="file" name="image" class="form-control-file" id="industry_image">
+                  
+                </div>
+                <button type="submit" id="button-submit" class="btn btn__primary btn__block btn__xl">
+                  <span>Add</span>
+                  <i class="icon-arrow-right"></i>
+                </button>
+              </form>
+            </div>
+            
+          
+          </div><!-- /.industry-popup -->
+         
+                   
+      </div><!-- /.container -->
+    </section><!-- /.page-title -->
+
+
+
+    <!-- ========================
+        Services Layout 2
+    =========================== -->
+    <section class="services-layout2 pb-0">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-6 offset-lg-3">
+            <div class="heading text-center mb-50">
+              <h2 class="heading__subtitle">Nationwide Service, Local Expertise</h2>
+              <h3 class="heading__title">Offer The Latest Software And Solutions To Our customers! </h3>
+            </div><!-- /.heading -->
+          </div><!-- /.col-lg-6 -->
+        </div><!-- /.row -->
+       
+          
+        <div class="row">
+          {% for industry in industries %}
+          <!-- industry Item -->
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            <div class="post-item">
+
+              <div class="post__img">
+                <a href="{% url 'single_industry' industry.pk %}">
+                  <img src="{% static industry.image %}" alt="industry image" style="width: 350px; height: 350px;">
+                </a>
+              </div><!-- /.blog-img -->
+              
+              <div class="post__body">
+                <h4 class="post__title"><a href="{% url 'single_industry' industry.pk %}">{{ industry.title }}</a></h4>
+                <div class="post__meta">  
+                  <p class="post__desc">{{ industry.desc}}</p>
+                  <a href="{% url 'single_industry' industry.pk %}" id= "industry-single" class="btn btn__secondary btn__link">
+                  <span>Read More</span>
+                  <i class="icon-arrow-right"></i>
+                  </a>
+                </div>
+              </div><!-- /.blog-content -->
+              
+            </div><!-- /.post-item -->
+          </div><!-- /.col-lg-4 -->
+          <!-- End Blog Item -->
+          {% endfor %}
+        </div><!-- /.row -->
+
+      </div><!-- /.container -->
+    </section><!-- /.Services Layout 2 -->
+   
+        <!-- ========================
+        Footer
+      ========================== -->
+      <footer class="footer bg-secondary">
+        <div class="container">
+          <div class="footer-top pt-50 pb-30">
+      
+          </div><!-- /.footer-top -->
+          <div class="footer-primary">
+            <div class="row">
+              <div class="col-sm-12 col-md-12 col-lg-3 footer-widget footer-widget-about">
+                <div class="footer-widget__content">
+                  <div class="contact-info">
+                    <h6 class="footer-widget__title">Quick Contact</h6>
+                    <ul class="contact-list list-unstyled">
+                      <li class="color-gray">If you have any questions or need help, feel free to contact with our team.
+                      </li>
+                      <li class="mt-20 mb-20">
+                        <a href="tel:01061245741" class="phone-number">
+                          <i class="icon-phone"></i> <span>01061245741</span>
+                        </a>
+                      </li>
+                      <li class="color-body">2307 Beverley Rd Brooklyn, New York 11226 United States.</li>
+                    </ul>
+                  </div><!-- /.contact-info -->
+                  <ul class="social-icons list-unstyled mb-0">
+                    <li><a href="/"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="/"><i class="fab fa-instagram"></i></a></li>
+                    <li><a href="/"><i class="fab fa-twitter"></i></a></li>
+                  </ul><!-- /.social-icons -->
+                </div><!-- /.footer-widget__content -->
+              </div><!-- /.col-xl-2 -->
+              <div class="col-sm-6 col-md-6 col-lg-2 offset-lg-1 footer-widget footer-widget-nav">
+                <h6 class="footer-widget__title">Company</h6>
+                <div class="footer-widget__content">
+                  <nav>
+                    <ul class="list-unstyled">
+                      <li> <a href="/">About Us </a></li>
+                      <li><a href="/">Meet Our Team </a></li>
+                      <li><a href="/blog/">News & Media</a></li>
+                      <li><a href="/">Case Studies</a></li>
+                      <li><a href="/">Contacts </a></li>
+                      <li><a href="/">Investors </a></li>
+                    </ul>
+                  </nav>
+                </div><!-- /.footer-widget__content -->
+              </div><!-- /.col-lg-2 -->
+              <div class="col-sm-6 col-md-6 col-lg-2 footer-widget footer-widget-nav">
+                <h6 class="footer-widget__title">Solutions</h6>
+                <div class="footer-widget__content">
+                  <nav>
+                    <ul class="list-unstyled">
+                      <li><a href="/">IT Management</a></li>
+                      <li><a href="/">Cyber Security</a></li>
+                      <li><a href="/">Cloud Computing</a></li>
+                      <li><a href="/">IT Consulting</a></li>
+                      <li><a href="/">Software Dev</a></li>
+                      <li><a href="/">IT Support</a></li>
+                    </ul>
+                  </nav>
+                </div><!-- /.footer-widget__content -->
+              </div><!-- /.col-lg-2 -->
+              <div class="col-sm-6 col-md-6 col-lg-2 footer-widget footer-widget-nav">
+                <h6 class="footer-widget__title">Resources</h6>
+                <div class="footer-widget__content">
+                  <nav>
+                    <ul class="list-unstyled">
+                      <li><a href="/">Docs</a></li>
+                      <li><a href="/">Community</a></li>
+                      <li><a href="/">Guides</a></li>
+                      <li><a href="/">Examples</a></li>
+                      <li><a href="/">FAQs</a></li>
+                      <li><a href="/">Forums</a></li>
+                    </ul>
+                  </nav>
+                </div><!-- /.footer-widget__content -->
+              </div><!-- /.col-lg-2 -->
+              <div class="col-sm-6 col-md-6 col-lg-2 footer-widget footer-widget-nav">
+                <h6 class="footer-widget__title">Legal</h6>
+                <div class="footer-widget__content">
+                  <nav>
+                    <ul class="list-unstyled">
+                      <li><a href="/">GDPR Compliance</a></li>
+                      <li><a href="/">Terms of Use</a></li>
+                      <li><a href="/">Privacy Policy</a></li>
+                      <li><a href="/">Security Policy</a></li>
+                    </ul>
+                  </nav>
+                </div><!-- /.footer-widget__content -->
+              </div><!-- /.col-lg-2 -->
+            </div><!-- /.row -->
+          </div><!-- /.footer-primary -->
+          <div class="footer-secondary text-center">
+            <div class="row align-items-center justify-content-md-center">
+              <div class="col-sm-12 col-md-auto">
+                <p class="mb-0">© 2023 DataSoft IT Solutions, All Rights Reserved. Made with <i
+                    class="fas fa-heart color-primary"></i> by <a href="/">Themezinho</a></p>
+              </div><!-- /.col-md-auto -->
+            </div><!-- /.row -->
+          </div><!-- /.footer-secondary -->
+        </div><!-- /.container -->
+      </footer><!-- /.Footer -->
+      <button id="scrollTopBtn"><i class="fas fa-long-arrow-alt-up"></i></button>
+      <!-- Scroll Top Button -->
+    
+  
+
+    <!-- JS Files -->
+    <script src="{% static 'assets/js/jquery-3.5.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins.min.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+     
+            <script>
+            var industryPopup = document.getElementById("industry-popup");
+            var openIndustryFormButton = document.getElementById("openIndustryForm");
+          
+            openIndustryFormButton.addEventListener("click", function() {
+              if (industryPopup.style.display === "block") {
+                industryPopup.style.display = "none";
+              } else {
+                industryPopup.style.display = "block";
+              }
+            });
+
+            
+              document.getElementById("openIndustryForm").addEventListener("click", function() {
+                var messageDiv = document.getElementById("message");
+                if (messageDiv.style.display === "block" ) {
+                  messageDiv.style.display = "none";
+                } 
+              });
+
+          </script>
+
+         
+
+  </body>
+  
+  </html>

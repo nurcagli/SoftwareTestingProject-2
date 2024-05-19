@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="{% static 'style.css' %}" >
+    <title>Login</title>
+</head>
+<body class="login-body">
+    <div class="login-container">
+        <h2>Login Page</h2>
+        <h3><a href="/register">Register</a></h3>
+        <form class="login-form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+            {%if Error is not None %}
+                <span style="color: red;">Invalid Username or Password!</span>
+            {% endif %}
+        </form>
+    </div>
+</body>
+</html>

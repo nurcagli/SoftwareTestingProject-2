@@ -1,0 +1,6 @@
+{% comment %} <!-- your_template.html -->
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Kaydet</button>
+</form> {% endcomment %}
