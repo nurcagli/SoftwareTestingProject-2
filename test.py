@@ -23,7 +23,7 @@ class InterfaceTests:
         edge_options.add_argument('--disable-dev-shm-usage')
         edge_options.add_argument('--ignore-certificate-errors')
         edge_options.add_argument('--disable-web-security')
-        edge_service = EdgeService("C:/Users/rabii/OneDrive/Masaüstü/edgedriver_win64/msedgedriver.exe")
+        edge_service = EdgeService("edgedriver_win64/msedgedriver.exe")
         self.driver = Edge(service=edge_service, options=edge_options)
 
 
